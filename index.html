@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa de Calor de Crimes</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map {
+            height: 400px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Informe o Crime</h1>
+        <form id="crimeForm">
+            <label for="crimeDate">Data:</label>
+            <input type="date" id="crimeDate" required><br><br>
+            <label for="crimeCEP">CEP:</label>
+            <input type="text" id="crimeCEP" required><br><br>
+            <label for="crimeType">Tipo de Crime:</label>
+            <select id="crimeType" required>
+                <option value="Assalto">Assalto</option>
+                <option value="Furto">Furto</option>
+                <option value="Homicídio">Homicídio</option>
+                <option value="Outros">Outros</option>
+                <!-- Adicione mais opções conforme necessário -->
+            </select><br><br>
+            <label for="crimeDetails">Detalhes:</label>
+            <textarea id="crimeDetails" rows="4" cols="50"></textarea><br><br>
+            <button type="submit">Registrar Crime</button>
+        </form>
+        <div id="map"></div>
+    </div>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+
+
