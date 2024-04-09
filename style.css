@@ -1,0 +1,14 @@
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+input, button {
+    margin-bottom: 10px;
+}
+
+#map {
+    height: 40px;
+    margin-top: 20px;
+}
