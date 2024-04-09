@@ -1,6 +1,6 @@
 <?php
 // Conectar ao banco de dados
-$conn = new mysqli('db4free.net', 'brendofcghh', 'qwer1234', 'projetinho');
+$conn = new mysqli('www.db4free.net', 'brendofcghh', 'qwer1234', 'projetinho');
 
 // Verificar a conexão
 if ($conn->connect_error) {
