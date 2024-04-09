@@ -33,6 +33,25 @@ function findCrimesNearby(latlng) {
     return [];
 }
 
+function geocodeAddress(cep, crimeData) {
+    fetch('crimes.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(crimeData)
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log('Crime registrado com sucesso!');
+        } else {
+            console.error('Falha ao registrar crime:', response.statusText);
+        }
+    })
+    .catch(error => {
+        console.error('Erro ao registrar crime:', error);
+    });
+}
 
 // Inicializar o mapa
 function initMap() {
