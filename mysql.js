@@ -1,52 +1,30 @@
-const express = require('express');
-const mysql = require('mysql');
+<?php
+// Conectar ao banco de dados
+$conn = new mysqli('db4free.net', 'brendofcghh', 'qwer1234', 'projetinho');
 
-const app = express();
-app.use(express.json());
-
-const db = mysql.createConnection({
-    host: 'db4free.net',
-    user: 'brendofcghh',
-    password: 'qwer1234',
-    database: 'projetinho'
-});
-
-// Endpoint para registrar um crime
-app.post('/crimes', (req, res) => {
-    const { data, cep, tipo_crime, detalhes } = req.body;
-    const sql = 'INSERT INTO crimes (data, cep, tipo_crime, detalhes) VALUES (?, ?, ?, ?)';
-    db.query(sql, [data, cep, tipo_crime, detalhes], (err, result) => {
-        if (err) {
-            console.error('Erro ao registrar crime:', err);
-            res.status(500).send('Erro ao registrar crime');
-        } else {
-            console.log('Crime registrado com sucesso!');
-            res.sendStatus(200);
-        }
-    });
-});
-
-app.listen(3000, () => {
-    console.log('Servidor rodando na porta 3000');
-});
-
-function geocodeAddress(cep, crimeData) {
-    fetch('crimes.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(crimeData)
-    })
-    .then(response => {
-        if (response.ok) {
-            console.log('Crime registrado com sucesso!');
-        } else {
-            console.error('Falha ao registrar crime:', response.statusText);
-        }
-    })
-    .catch(error => {
-        console.error('Erro ao registrar crime:', error);
-    });
+// Verificar a conexão
+if ($conn->connect_error) {
+    die("Erro na conexão com o banco de dados: " . $conn->connect_error);
 }
 
+// Verificar se foi feita uma solicitação POST para registrar um crime
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Receber os dados do crime do corpo da solicitação
+    $data = $_POST['data'];
+    $cep = $_POST['cep'];
+    $tipo_crime = $_POST['tipo_crime'];
+    $detalhes = $_POST['detalhes'];
+
+    // Preparar a consulta SQL para inserir os dados na tabela de crimes
+    $sql = "INSERT INTO crimes (data, cep, tipo_crime, detalhes) VALUES ('$data', '$cep', '$tipo_crime', '$detalhes')";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Crime registrado com sucesso!";
+    } else {
+        echo "Erro ao registrar crime: " . $conn->error;
+    }
+}
+
+// Fechar a conexão com o banco de dados
+$conn->close();
+?>
