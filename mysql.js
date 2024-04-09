@@ -29,3 +29,24 @@ app.post('/crimes', (req, res) => {
 app.listen(3000, () => {
     console.log('Servidor rodando na porta 3000');
 });
+
+function geocodeAddress(cep, crimeData) {
+    fetch('crimes.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(crimeData)
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log('Crime registrado com sucesso!');
+        } else {
+            console.error('Falha ao registrar crime:', response.statusText);
+        }
+    })
+    .catch(error => {
+        console.error('Erro ao registrar crime:', error);
+    });
+}
+
