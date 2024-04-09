@@ -9,6 +9,7 @@ input, button {
 }
 
 #map {
-    height: 40px;
-    margin-top: 20px;
+   height: 400px;
+            width: 800px;
+            margin-top: 30px;
 }
